@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addReminder, deleteReminder } from '../actions';
+import { addReminder, deleteReminder, clearReminders } from '../actions';
 import moment from 'moment';
 import '../App.css';
 
@@ -77,6 +77,12 @@ class App extends Component {
           </button>
         </div>
         { this.renderReminders() }
+        <div
+          className='btn btn-danger'
+          onClick={() => this.props.clearReminders()}
+        >
+          Clear Reminders
+        </div>
       </div>
     )
   }
@@ -89,5 +95,6 @@ function mapStateToProps(state) {
   }
 }
 
-// In order to use mapState.., must call connect, pass in mapState along with action, and also component in use (App)
-export default connect(mapStateToProps, { addReminder, deleteReminder })(App);
+// In order to use mapState.., must call connect, pass in mapState along with action creators, and also component in use (App)
+// This is 'binding action creators to props'
+export default connect(mapStateToProps, { addReminder, deleteReminder, clearReminders })(App);
